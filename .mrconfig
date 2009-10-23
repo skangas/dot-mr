@@ -34,8 +34,8 @@ lib =
 # all
 
 [.etc/bash.git]
-pporder = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/bash.git' 'bash.git' '../../'
 
 [.etc/cpanplus.git]
 order = 1
