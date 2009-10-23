@@ -1,0 +1,51 @@
+[DEFAULT]
+include = cat ~/.mr/* 2>/dev/null || true
+include = cat ~/src/mr/lib/*
+# This hack is here because git pull stupidly outputs tag info to stderr.
+# Shut it up but let real errors through, for use in cron.
+quietupdate = mr -s -n update 3>&1 1>/dev/null 2>&3 | egrep -v '(storing tag|tag: )' || true
+lib = 
+	hostname="$(hostname)"
+	whoami="$(whoami)"
+	full() {
+		test "$whoami" = skangas
+	}
+	on() {
+		for host in $@; do
+			if [ "${host%@*}" != "${host#*@}" ]; then
+				if [ "$whoami" != "${host%@*}" ]; then
+					continue
+				fi
+				host="${host#*@}"
+			fi
+			if [ "$hostname" = "$host" ]; then
+				return 0
+			fi
+		done
+		return 1
+	}
+	wantx() {
+		on skangas@lenin skangas@castro
+	}
+	private() {
+		on skangas@lenin skangas@castro
+	}
+
+[.etc/cpanplus.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
+
+[.etc/screen.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'screen.git' '../../'
+
+[.etc/xorg.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'screen.git' '../../'
+skip = ! wantx
+
+[src/mr]
+order=50
+checkout = git clone git://git.kitenet.net/mr
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = error "ca't push!"
