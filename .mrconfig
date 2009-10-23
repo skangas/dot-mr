@@ -33,6 +33,10 @@ lib =
 #########################################################################
 # all
 
+[bin]
+order = 1
+checkout = git clone gitosis@git.marxist.se:bin.git
+
 [.etc/bash.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/bash.git' 'bash.git' '../../'
