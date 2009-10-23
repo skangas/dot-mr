@@ -1,5 +1,5 @@
 [DEFAULT]
-include = cat ~/.mr/* 2>/dev/null || true
+#include = cat ~/.mr/* 2>/dev/null || true
 include = cat ~/src/mr/lib/*
 # This hack is here because git pull stupidly outputs tag info to stderr.
 # Shut it up but let real errors through, for use in cron.
@@ -35,13 +35,17 @@ lib =
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
 
+[.etc/mr.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '../../'
+
 [.etc/screen.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'screen.git' '../../'
 
 [.etc/xorg.git]
 order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'screen.git' '../../'
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'xorg.git' '../../'
 skip = ! wantx
 
 [src/mr]
