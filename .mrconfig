@@ -1,5 +1,4 @@
 [DEFAULT]
-#include = cat ~/.mr/* 2>/dev/null || true
 include = cat ~/src/mr/lib/*
 # This hack is here because git pull stupidly outputs tag info to stderr.
 # Shut it up but let real errors through, for use in cron.
@@ -31,9 +30,20 @@ lib =
 		on skangas@lenin skangas@castro
 	}
 
+#########################################################################
+# all
+
+[.etc/bash.git]
+pporder = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
+
 [.etc/cpanplus.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
+
+[.etc/emacs.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
 
 [.etc/mr.git]
 order = 1
@@ -47,6 +57,17 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'scree
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'xorg.git' '../../'
 skip = ! wantx
+
+#########################################################################
+# private
+
+
+#########################################################################
+# wantx
+
+
+#########################################################################
+# some sources
 
 [src/mr]
 order=50
