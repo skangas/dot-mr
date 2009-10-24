@@ -71,19 +71,19 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'scree
 #########################################################################
 # wantx
 
-[/.etc/backgrounds.git]
+[.etc/backgrounds.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/backgrounds.git' 'backgrounds.git' '../../'
 skip = ! wantx
 
-[/.etc/fonts.git]
+[.etc/fonts.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/fonts.git' 'fonts.git' '../../'
 skip = ! wantx
 
-[/.etc/mplayer.git]
+[.etc/mplayer.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mplayer.git' 'mplayer.git' '../../'
 skip = ! wantx
 
-[/.etc/xmonad.git]
+[.etc/xmonad.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xmonad.git' 'xmonad.git' '../../'
 skip = ! wantx
 
