@@ -23,6 +23,9 @@ lib =
 		done
 		return 1
 	}
+        admin() {
+                on skangas@lenin skangas@castro skangas@marx
+        }
 	wantx() {
 		on skangas@lenin skangas@castro
 	}
@@ -49,6 +52,10 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpa
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
 
+[/.etc/kernel-pkg.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/kernel-pkg.git' 'kernel-pkg.git' '../../'
+skip = ! admin
+
 [.etc/mr.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '../../'
@@ -57,11 +64,6 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'screen.git' '../../'
 
-[.etc/xorg.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'xorg.git' '../../'
-skip = ! wantx
-
 #########################################################################
 # private
 
@@ -69,6 +71,26 @@ skip = ! wantx
 #########################################################################
 # wantx
 
+[/.etc/backgrounds.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/backgrounds.git' 'backgrounds.git' '../../'
+skip = ! wantx
+
+[/.etc/fonts.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/fonts.git' 'fonts.git' '../../'
+skip = ! wantx
+
+[/.etc/mplayer.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mplayer.git' 'mplayer.git' '../../'
+skip = ! wantx
+
+[/.etc/xmonad.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xmonad.git' 'xmonad.git' '../../'
+skip = ! wantx
+
+[.etc/xorg.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'xorg.git' '../../'
+skip = ! wantx
 
 #########################################################################
 # some sources
@@ -77,4 +99,4 @@ skip = ! wantx
 order=50
 checkout = git clone git://git.kitenet.net/mr
 skip = ([ "$1" = update ] && ! hours_since "$1" 12)
-push = error "ca't push!"
+push = error "can't push!"
