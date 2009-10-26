@@ -52,7 +52,7 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpa
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
 
-[/.etc/kernel-pkg.git]
+[.etc/kernel-pkg.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/kernel-pkg.git' 'kernel-pkg.git' '../../'
 skip = ! admin
 
@@ -64,26 +64,36 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'screen.git' '../../'
 
+# [research/haskell.git]
+# order = 5
+
+# [research/sicp.git]
+# order = 5
+# checkout = git clone gitosis@git.marxist.se
+
 #########################################################################
 # private
-
 
 #########################################################################
 # wantx
 
-[/.etc/backgrounds.git]
+[.etc/backgrounds.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/backgrounds.git' 'backgrounds.git' '../../'
 skip = ! wantx
 
-[/.etc/fonts.git]
+[.etc/conkeror.git]
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/conkeror.git' 'conkeror.git' '../../'
+skip = ! wantx
+
+[.etc/fonts.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/fonts.git' 'fonts.git' '../../'
 skip = ! wantx
 
-[/.etc/mplayer.git]
+[.etc/mplayer.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mplayer.git' 'mplayer.git' '../../'
 skip = ! wantx
 
-[/.etc/xmonad.git]
+[.etc/xmonad.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xmonad.git' 'xmonad.git' '../../'
 skip = ! wantx
 
