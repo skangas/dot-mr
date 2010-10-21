@@ -74,6 +74,11 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'scree
 #########################################################################
 # private
 
+[.etc/gnus.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/gnus.git' 'gnus.git' '../../'
+skip = ! wantx
+
 #########################################################################
 # wantx
 
