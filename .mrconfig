@@ -34,6 +34,20 @@ lib =
 	}
 
 #########################################################################
+# emacs
+
+[.etc/emacs.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
+
+#checkout = git clone git@github.com:skangas/zenburn-el.git
+[.emacs.d/lisp/zenburn]
+checkout = git clone git://github.com/dbrock/zenburn-el.git zenburn
+skip = ([ "$1" = update ] && ! hours_since "$1" 12)
+push = error "can't push!"
+order = 5
+
+#########################################################################
 # all
 
 [bin]
@@ -47,10 +61,6 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/bash.git' 'bash.gi
 [.etc/cpanplus.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
-
-[.etc/emacs.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
 
 [.etc/kernel-pkg.git]
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/kernel-pkg.git' 'kernel-pkg.git' '../../'
