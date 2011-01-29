@@ -66,9 +66,17 @@ checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpa
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/kernel-pkg.git' 'kernel-pkg.git' '../../'
 skip = ! admin
 
+[.etc/mpd.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mpd.git' 'mpd.git' '../../'
+
 [.etc/mr.git]
 order = 1
 checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '../../'
+
+[.etc/rtorrent.git]
+order = 1
+checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/rtorrent.git' 'rtorrent.git' '../../'
 
 [.etc/screen.git]
 order = 1
