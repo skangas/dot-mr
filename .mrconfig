@@ -52,7 +52,9 @@ lib =
     }
     github_fake_bare_checkout() {
         git_fake_bare_checkout "git://github.com/skangas/$1" "$2" '../../'
-        git remote set-url --push origin "git@github.com:skangas/$2"
+        GIT_DIR=$PWD
+        export GIT_DIR
+        git remote set-url --push origin "git@github.com:skangas/$1"
     }
 
 #########################################################################
@@ -84,10 +86,10 @@ checkout = github_fake_bare_checkout 'dot-cpanplus.git' 'cpanplus.git'
 checkout = github_fake_bare_checkout 'dot-git.git' 'git.git'
 
 [.etc/kernel-pkg.git]
-checkout = git_fake_bare_checkout 'dot-kernel-pkg.git' 'kernel-pkg.git'
+checkout = github_fake_bare_checkout 'dot-kernel-pkg.git' 'kernel-pkg.git'
 
 [.etc/mr.git]
-checkout = git_fake_bare_checkout 'dot-mr.git' 'mr.git'
+checkout = github_fake_bare_checkout 'dot-mr.git' 'mr.git'
 
 [.etc/rtorrent.git]
 checkout = mkdir -p ~/download/bittorrent; mkdir -p ~/download/torrents; github_fake_bare_checkout 'dot-rtorrent.git' 'rtorrent.git'
@@ -118,7 +120,7 @@ skip = ! private
 # skip = ! wantx
 
 [.etc/fonts.git]
-checkout = git_fake_bare_checkout 'dot-fonts.git' 'fonts.git'
+checkout = github_fake_bare_checkout 'dot-fonts.git' 'fonts.git'
 skip = ! wantx
 
 [.etc/mpd.git]
