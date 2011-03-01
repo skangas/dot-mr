@@ -1,128 +1,140 @@
+# -*- mode: sh -*-
 [DEFAULT]
-include = cat ~/src/mr/lib/*
+# Include all available libs.
+include =
+    if [ -d ~/src/mr/lib ]; then
+        cat ~/src/mr/lib/*
+    elif [ -d /usr/share/mr ]; then
+        cat /usr/share/mr/* 2>/dev/null || true
+    fi
+# Teach mr to run a few git and svn specific commands.
+svn_cleanup = svn cleanup "$@"
+git_gc = git gc "$@"
+git_tag = git tag -l
+svn_tag = svn ls "$(LC_ALL=C svn info . | grep -i ^URL: | cut -d ' ' -f 2 | sed -e 's/trunk/tags/')"
+# I prefer to git-svn rebase to fetch
+git_svn_update = git svn rebase
 # This hack is here because git pull stupidly outputs tag info to stderr.
 # Shut it up but let real errors through, for use in cron.
 quietupdate = mr -s -n update 3>&1 1>/dev/null 2>&3 | egrep -v '(storing tag|tag: )' || true
-lib = 
-	hostname="$(hostname)"
-	whoami="$(whoami)"
-	full() {
-		test "$whoami" = skangas
-	}
-	on() {
-		for host in $@; do
-			if [ "${host%@*}" != "${host#*@}" ]; then
-				if [ "$whoami" != "${host%@*}" ]; then
-					continue
-				fi
-				host="${host#*@}"
-			fi
-			if [ "$hostname" = "$host" ]; then
-				return 0
-			fi
-		done
-		return 1
-	}
-        admin() {
-                on skangas@lenin skangas@castro skangas@marx
-        }
-	wantx() {
-		on skangas@lenin skangas@castro
-	}
-	private() {
-		on skangas@lenin skangas@castro
-	}
+lib =
+    # Tests used below.
+    hostname="$(hostname)"
+    whoami="$(whoami)"
+    full() {
+        test "$whoami" = skangas
+    }
+    on() {
+        for host in $@; do
+            if [ "${host%@*}" != "${host#*@}" ]; then
+                if [ "$whoami" != "${host%@*}" ]; then
+                    continue
+                fi
+                host="${host#*@}"
+            fi
+            if [ "$hostname" = "$host" ]; then
+                return 0
+            fi
+        done
+        return 1
+    }
+    private() {
+        on skangas@huey skangas@kollontaj
+    }
+    wantx() {
+        on skangas@huey skangas@kollontaj
+    }
+    # Macros
+    github_clone() {
+        git clone "git://github.com/skangas/$1" $2
+        cd $2
+        git remote set-url --push origin git@github.com:skangas/$2
+    }
+    github_fake_bare_checkout() {
+        git_fake_bare_checkout "git://github.com/skangas/$1" "$2" '../../'
+        git remote set-url --push origin "git@github.com:skangas/$2"
+    }
 
 #########################################################################
 # emacs
 
-[.etc/emacs.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
+# [.etc/emacs.git]
+# order = 1
+# checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
 
-#checkout = git clone git@github.com:skangas/zenburn-el.git
 [.emacs.d/lisp/zenburn]
-checkout = git clone git://github.com/dbrock/zenburn-el.git zenburn
+checkout = github_clone 'zenburn-el.git' 'zenburn'
 skip = ([ "$1" = update ] && ! hours_since "$1" 12)
 push = error "can't push!"
 order = 5
 
 #########################################################################
-# all
+# all -- these are to be on all hosts
 
 [bin]
-order = 1
-checkout = git clone gitosis@git.marxist.se:bin.git
+checkout = github_clone 'home-bin.git' 'bin'
 
 [.etc/bash.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/bash.git' 'bash.git' '../../'
+checkout = github_fake_bare_checkout 'dot-bash.git' 'bash.git'
 
 [.etc/cpanplus.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/cpanplus.git' 'cpanplus.git' '../../'
+checkout = github_fake_bare_checkout 'dot-cpanplus.git' 'cpanplus.git'
+
+[.etc/git.git]
+checkout = github_fake_bare_checkout 'dot-git.git' 'git.git'
 
 [.etc/kernel-pkg.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/kernel-pkg.git' 'kernel-pkg.git' '../../'
-skip = ! admin
-
-[.etc/mpd.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mpd.git' 'mpd.git' '../../'
+checkout = git_fake_bare_checkout 'dot-kernel-pkg.git' 'kernel-pkg.git'
 
 [.etc/mr.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mr.git' 'mr.git' '../../'
+checkout = git_fake_bare_checkout 'dot-mr.git' 'mr.git'
 
 [.etc/rtorrent.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/rtorrent.git' 'rtorrent.git' '../../'
+checkout = mkdir -p ~/download/bittorrent; mkdir -p ~/download/torrents; github_fake_bare_checkout 'dot-rtorrent.git' 'rtorrent.git'
 
 [.etc/screen.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/screen.git' 'screen.git' '../../'
-
-# [research/haskell.git]
-# order = 5
-
-# [research/sicp.git]
-# order = 5
-# checkout = git clone gitosis@git.marxist.se
+checkout = github_fake_bare_checkout 'dot-screen.git' 'screen.git'
 
 #########################################################################
-# private
+# private -- pull to home and laptop only
+
+[.etc/irssi.git]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-irssi.git' 'irssi.git'
+skip = ! private
 
 [.etc/gnus.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/gnus.git' 'gnus.git' '../../'
-skip = ! wantx
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-gnus.git' 'gnus.git'
+skip = ! private
+
+[.etc/mailfilter.git]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git'
+skip = ! private
 
 #########################################################################
 # wantx
 
-[.etc/backgrounds.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/backgrounds.git' 'backgrounds.git' '../../'
-skip = ! wantx
-
-[.etc/conkeror.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/conkeror.git' 'conkeror.git' '../../'
-skip = ! wantx
+# [.etc/conkeror.git]
+# checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/conkeror.git' 'conkeror.git' '../../'
+# skip = ! wantx
 
 [.etc/fonts.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/fonts.git' 'fonts.git' '../../'
+checkout = git_fake_bare_checkout 'dot-fonts.git' 'fonts.git'
 skip = ! wantx
+
+[.etc/mpd.git]
+checkout = github_fake_bare_checkout 'dot-mpd.git' 'mpd.git'
+skip = ! on skangas@huey skangas@kollontaj
 
 [.etc/mplayer.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/mplayer.git' 'mplayer.git' '../../'
-skip = ! wantx
-
-[.etc/xmonad.git]
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xmonad.git' 'xmonad.git' '../../'
+checkout = github_fake_bare_checkout 'dot-mplayer.git' 'mplayer.git'
 skip = ! wantx
 
 [.etc/xorg.git]
-order = 1
-checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/xorg.git' 'xorg.git' '../../'
+checkout = github_fake_bare_checkout 'dot-xorg.git' 'xorg.git'
+skip = ! wantx
+
+[.etc/xmonad.git]
+checkout = github_fake_bare_checkout 'dot-xmonad.git' 'xmonad.git'
 skip = ! wantx
 
 #########################################################################
