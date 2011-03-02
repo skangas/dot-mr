@@ -76,8 +76,14 @@ order = 5
 [bin]
 checkout = github_clone 'home-bin.git' 'bin'
 
+[.etc/aspell.git]
+checkout = github_fake_bare_checkout 'dot-aspell.git' 'aspell.git'
+
 [.etc/bash.git]
 checkout = github_fake_bare_checkout 'dot-bash.git' 'bash.git'
+
+[.etc/bazaar.git]
+checkout = github_fake_bare_checkout 'dot-bazaar.git' 'bazaar.git'
 
 [.etc/cpanplus.git]
 checkout = github_fake_bare_checkout 'dot-cpanplus.git' 'cpanplus.git'
@@ -101,23 +107,27 @@ checkout = github_fake_bare_checkout 'dot-screen.git' 'screen.git'
 # private -- pull to home and laptop only
 
 [.etc/irssi.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-irssi.git' 'irssi.git'
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-irssi.git' 'irssi.git' '../../'
 skip = ! private
 
 [.etc/gnus.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-gnus.git' 'gnus.git'
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-gnus.git' 'gnus.git' '../../'
 skip = ! private
 
 [.etc/mailfilter.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git'
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git' '../../'
+skip = ! private
+
+[.etc/secrets.git]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
 skip = ! private
 
 #########################################################################
 # wantx
 
-# [.etc/conkeror.git]
-# checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/conkeror.git' 'conkeror.git' '../../'
-# skip = ! wantx
+[.etc/conkeror.git]
+checkout = github_fake_bare_checkout 'dot-conkeror.git' 'conkeror.git'
+skip = ! wantx
 
 [.etc/fonts.git]
 checkout = github_fake_bare_checkout 'dot-fonts.git' 'fonts.git'
