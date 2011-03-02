@@ -76,8 +76,14 @@ order = 5
 [bin]
 checkout = github_clone 'home-bin.git' 'bin'
 
+[.etc/aspell.git]
+checkout = github_fake_bare_checkout 'dot-aspell.git' 'aspell.git'
+
 [.etc/bash.git]
 checkout = github_fake_bare_checkout 'dot-bash.git' 'bash.git'
+
+[.etc/bazaar.git]
+checkout = github_fake_bare_checkout 'dot-bazaar.git' 'bazaar.git'
 
 [.etc/cpanplus.git]
 checkout = github_fake_bare_checkout 'dot-cpanplus.git' 'cpanplus.git'
@@ -112,12 +118,16 @@ skip = ! private
 checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git' '../../'
 skip = ! private
 
+[.etc/secrets.git]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
+skip = ! private
+
 #########################################################################
 # wantx
 
-# [.etc/conkeror.git]
-# checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/conkeror.git' 'conkeror.git' '../../'
-# skip = ! wantx
+[.etc/conkeror.git]
+checkout = github_fake_bare_checkout 'dot-conkeror.git' 'conkeror.git'
+skip = ! wantx
 
 [.etc/fonts.git]
 checkout = github_fake_bare_checkout 'dot-fonts.git' 'fonts.git'
