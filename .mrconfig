@@ -98,7 +98,7 @@ checkout = github_fake_bare_checkout 'dot-kernel-pkg.git' 'kernel-pkg.git'
 checkout = github_fake_bare_checkout 'dot-mr.git' 'mr.git'
 
 [.etc/rtorrent.git]
-checkout = mkdir -p ~/download/bittorrent ; mkdir -p ~/download/torrents ; github_fake_bare_checkout 'dot-rtorrent.git' 'rtorrent.git'
+checkout = mkdir -p ~/download/bittorrent ; mkdir -p ~/download/torrents ; mkdir -p ~/.rtorrent-session ; github_fake_bare_checkout 'dot-rtorrent.git' 'rtorrent.git'
 
 [.etc/screen.git]
 checkout = github_fake_bare_checkout 'dot-screen.git' 'screen.git'
