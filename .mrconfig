@@ -122,6 +122,10 @@ skip = ! private
 checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
 skip = ! private
 
+[org]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/home-org.git' 'org' '../../'
+skip = ! private
+
 #########################################################################
 # wantx
 
