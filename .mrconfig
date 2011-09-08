@@ -103,6 +103,9 @@ checkout = mkdir -p ~/download/bittorrent ; mkdir -p ~/download/torrents ; mkdir
 [.etc/screen.git]
 checkout = github_fake_bare_checkout 'dot-screen.git' 'screen.git'
 
+[.etc/ssh.git]
+checkout = github_fake_bare_checkout 'dot-ssh.git' 'ssh.git'
+
 #########################################################################
 # private -- pull to home and laptop only
 
