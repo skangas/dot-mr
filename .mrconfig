@@ -121,6 +121,10 @@ skip = ! private
 checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git' '../../'
 skip = ! private
 
+[.etc/offlineimap.git]
+checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-offlineimap.git' 'offlineimap.git' '../../'
+skip = ! private
+
 [.etc/secrets.git]
 checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
 skip = ! private
