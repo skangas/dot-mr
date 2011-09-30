@@ -60,9 +60,9 @@ lib =
 #########################################################################
 # emacs
 
-# [.etc/emacs.git]
-# order = 1
-# checkout = git_fake_bare_checkout 'gitosis@git.marxist.se:etc/emacs.git' 'emacs.git' '../../'
+[.etc/emacs.git]
+order = 1
+checkout = github_fake_bare_checkout 'dot-emacs.git' 'emacs.git' '../../'
 
 [.emacs.d/lisp/zenburn]
 checkout = github_clone 'zenburn-el.git' 'zenburn'
