@@ -134,7 +134,7 @@ checkout = git clone skangas@huey.skangas.se:.repos/home-dokument.git dokument
 skip = ! private
 
 [dokument/avanti]
-checkout = git clone skangas@huey.skangas.se:.repos/dokument/avanti.git dokument/avanti
+checkout = git clone skangas@huey.skangas.se:.repos/dokument/avanti.git avanti
 skip = ! private
 
 [org]
