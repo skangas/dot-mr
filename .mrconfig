@@ -129,6 +129,10 @@ skip = ! private
 checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
 skip = ! private
 
+[dokument]
+checkout = git clone skangas@huey.skangas.se:.repos/home-dokument.git dokument
+skip = ! private
+
 [org]
 checkout = git clone skangas@huey.skangas.se:.repos/home-org.git org
 skip = ! private
