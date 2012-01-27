@@ -63,6 +63,7 @@ lib =
 [.etc/emacs.git]
 order = 1
 checkout = github_fake_bare_checkout 'dot-emacs.git' 'emacs.git' '../../'
+fixups = cd ../../.emacs.d && make all 1>/dev/null 2>/dev/null
 
 [.emacs.d/lisp/zenburn]
 checkout = github_clone 'zenburn-el.git' 'zenburn'
