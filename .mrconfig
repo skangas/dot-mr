@@ -14,9 +14,6 @@ git_tag = git tag -l
 svn_tag = svn ls "$(LC_ALL=C svn info . | grep -i ^URL: | cut -d ' ' -f 2 | sed -e 's/trunk/tags/')"
 # I prefer to git-svn rebase to fetch
 git_svn_update = git svn rebase
-# This hack is here because git pull stupidly outputs tag info to stderr.
-# Shut it up but let real errors through, for use in cron.
-quietupdate = mr -s -n update 3>&1 1>/dev/null 2>&3 | egrep -v '(storing tag|tag: )' || true
 lib =
     # Tests used below.
     hostname="$(hostname)"
@@ -61,7 +58,6 @@ lib =
 # emacs
 
 [.etc/emacs.git]
-order = 1
 checkout = github_fake_bare_checkout 'dot-emacs.git' 'emacs.git' '../../'
 fixups = cd ../../.emacs.d && make all 1>/dev/null 2>/dev/null
 
@@ -69,7 +65,7 @@ fixups = cd ../../.emacs.d && make all 1>/dev/null 2>/dev/null
 checkout = github_clone 'zenburn-el.git' 'zenburn'
 skip = ([ "$1" = update ] && ! hours_since "$1" 72)
 push = echo "can't push!"
-order = 5
+order = 15
 
 #########################################################################
 # all -- these are to be on all hosts
@@ -132,14 +128,17 @@ skip = ! private
 
 [dokument]
 checkout = git clone skangas@huey.skangas.se:.repos/home-dokument.git dokument
+order = 1
 skip = ! private
 
 [dokument/avanti]
 checkout = git clone skangas@huey.skangas.se:.repos/dokument/avanti.git avanti
+order = 1
 skip = ! private
 
 [org]
 checkout = git clone skangas@huey.skangas.se:.repos/home-org.git org
+order = 1
 skip = ! private
 
 #########################################################################
@@ -175,5 +174,10 @@ skip = ! wantx
 [src/mr]
 order=50
 checkout = git clone git://git.kitenet.net/mr
-skip = ([ "$1" = update ] && ! hours_since "$1" 24)
-push = echo "can't push!"
+#skip = ([ "$1" = update ] && ! hours_since "$1" 24)
+push = true # just skip silently
+fixup =
+    make build 1>/dev/null 2>/dev/null
+    mkdir -p ~/bin ~/usr/share/man/man1
+    [ ! -e ~/bin/mr ] && ln -s $PWD/mr ~/bin/mr
+    [ ! -e ~/bin/mr ] && ln -s $PWD/mr.1 ~/usr/share/man/man1
