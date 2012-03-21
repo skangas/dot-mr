@@ -88,6 +88,9 @@ checkout = github_fake_bare_checkout 'dot-cpanplus.git' 'cpanplus.git'
 [.etc/git.git]
 checkout = github_fake_bare_checkout 'dot-git.git' 'git.git'
 
+[.etc/guile.git]
+checkout = github_fake_bare_checkout 'dot-guile.git' 'guile.git'
+
 [.etc/kernel-pkg.git]
 checkout = github_fake_bare_checkout 'dot-kernel-pkg.git' 'kernel-pkg.git'
 
