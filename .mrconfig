@@ -139,6 +139,11 @@ checkout = git clone skangas@huey.skangas.se:.repos/dokument/avanti.git avanti
 order = 1
 skip = ! private
 
+[dokument/oversattning]
+checkout = git clone skangas@huey.skangas.se:.repos/home-dokument-oversattning.git oversattning
+order = 1
+skip = ! private
+
 [dokument/skola]
 checkout = git clone skangas@huey.skangas.se:.repos/home-dokument-skola.git skola
 order = 1
