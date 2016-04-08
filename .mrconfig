@@ -153,7 +153,7 @@ skip = ! private
 checkout = git clone skangas@huey.skangas.se:.repos/home-org.git org
 order = 1
 skip = ! private
-#pre_commit =
+pre_commit = echo foo
 
 #########################################################################
 # wantx
