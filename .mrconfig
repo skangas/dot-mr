@@ -36,10 +36,10 @@ lib =
         return 1
     }
     private() {
-        on skangas@huey skangas@kollontaj
+        on skangas@joffe skangas@kollontaj skangas@Stefans-MBP
     }
     wantx() {
-        on skangas@huey skangas@kollontaj
+        on skangas@joffe skangas@kollontaj
     }
     # Macros
     github_clone() {
@@ -111,47 +111,47 @@ checkout = github_fake_bare_checkout 'dot-ssh.git' 'ssh.git'
 # private -- pull to home and laptop only
 
 [.etc/irssi.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-irssi.git' 'irssi.git' '../../'
+checkout = git_fake_bare_checkout 'skangas@sk1917.duckdns.org:.repos/dot-irssi.git' 'irssi.git' '../../'
 skip = ! private
 
 [.etc/gnus.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-gnus.git' 'gnus.git' '../../'
+checkout = git_fake_bare_checkout 'skangas@sk1917.duckdns.org:.repos/dot-gnus.git' 'gnus.git' '../../'
 skip = ! private
 
 [.etc/mailfilter.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-mailfilter.git' 'mailfilter.git' '../../'
+checkout = git_fake_bare_checkout 'skangas@sk1917.duckdns.org:.repos/dot-mailfilter.git' 'mailfilter.git' '../../'
 skip = ! private
 
 [.etc/offlineimap.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-offlineimap.git' 'offlineimap.git' '../../'
+checkout = git_fake_bare_checkout 'skangas@sk1917.duckdns.org:.repos/dot-offlineimap.git' 'offlineimap.git' '../../'
 skip = ! private
 
 [.etc/secrets.git]
-checkout = git_fake_bare_checkout 'skangas@huey.skangas.se:.repos/dot-secrets.git' 'secrets.git' '../../'
+checkout = git_fake_bare_checkout 'skangas@sk1917.duckdns.org:.repos/dot-secrets.git' 'secrets.git' '../../'
 skip = ! private
 
 [dokument]
-checkout = git clone skangas@huey.skangas.se:.repos/home-dokument.git dokument
+checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument.git dokument
 order = 1
 skip = ! private
 
 [dokument/avanti]
-checkout = git clone skangas@huey.skangas.se:.repos/dokument/avanti.git avanti
+checkout = git clone skangas@sk1917.duckdns.org:.repos/dokument/avanti.git avanti
 order = 1
 skip = ! private
 
 [dokument/oversattning]
-checkout = git clone skangas@huey.skangas.se:.repos/home-dokument-oversattning.git oversattning
+checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument-oversattning.git oversattning
 order = 1
 skip = ! private
 
 [dokument/skola]
-checkout = git clone skangas@huey.skangas.se:.repos/home-dokument-skola.git skola
+checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument-skola.git skola
 order = 1
 skip = ! private
 
 [org]
-checkout = git clone skangas@huey.skangas.se:.repos/home-org.git org
+checkout = git clone skangas@sk1917.duckdns.org:.repos/home-org.git org
 order = 1
 skip = ! private
 pre_commit = git add .
