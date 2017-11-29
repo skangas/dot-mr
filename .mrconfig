@@ -138,11 +138,6 @@ checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument-oversattnin
 order = 1
 skip = ! private
 
-[dokument/skola]
-checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument-skola.git skola
-order = 1
-skip = ! private
-
 [org]
 checkout = git clone skangas@sk1917.duckdns.org:.repos/home-org.git org
 order = 1
