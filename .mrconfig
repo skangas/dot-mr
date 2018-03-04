@@ -2,16 +2,20 @@
 [DEFAULT]
 # Include all available libs.
 include =
-    if [ -d ~/src/mr/lib ]; then
-        cat ~/src/mr/lib/*
-    elif [ -d /usr/share/mr ]; then
+    ## DEPRECATED: I'm now using the mr that comes with the package manager.
+    # if [ -d ~/src/mr/lib ]; then
+    #     cat ~/src/mr/lib/*
+    # elif [ -d /usr/share/mr ]; then
+    if [ -d /usr/share/mr ]; then
         cat /usr/share/mr/* 2>/dev/null || true
+    elif [ -d /usr/local/share/mr ]; then
+        cat /usr/local/share/mr/* 2>/dev/null || true
     fi
 # Teach mr to run a few git and svn specific commands.
 svn_cleanup = svn cleanup "$@"
 git_gc = git gc "$@"
-git_tag = git tag -l
-svn_tag = svn ls "$(LC_ALL=C svn info . | grep -i ^URL: | cut -d ' ' -f 2 | sed -e 's/trunk/tags/')"
+git_tags = git tag -l
+svn_tags = svn ls "$(LC_ALL=C svn info . | grep -i ^URL: | cut -d ' ' -f 2 | sed -e 's/trunk/tags/')"
 # I prefer to git-svn rebase to fetch
 git_svn_update = git svn rebase
 lib =
@@ -174,13 +178,14 @@ skip = ! wantx
 #########################################################################
 # some sources
 
-[src/mr]
-order=50
-checkout = git clone git://git.kitenet.net/mr
-#skip = ([ "$1" = update ] && ! hours_since "$1" 24)
-push = true # just skip silently
-fixup =
-    make build 1>/dev/null 2>/dev/null
-    mkdir -p ~/bin ~/usr/share/man/man1
-    [ ! -e ~/bin/mr ] && ln -s $PWD/mr ~/bin/mr
-    [ ! -e ~/bin/mr ] && ln -s $PWD/mr.1 ~/usr/share/man/man1
+## DEPRECATED: I'm now using the mr that comes with the package manager.
+# [src/mr]
+# order=50
+# checkout = git clone git://git.kitenet.net/mr
+# #skip = ([ "$1" = update ] && ! hours_since "$1" 24)
+# push = true # just skip silently
+# fixup =
+#     make build 1>/dev/null 2>/dev/null
+#     mkdir -p ~/bin ~/usr/share/man/man1
+#     [ ! -e ~/bin/mr ] && ln -s $PWD/mr ~/bin/mr
+#     [ ! -e ~/bin/mr ] && ln -s $PWD/mr.1 ~/usr/share/man/man1
