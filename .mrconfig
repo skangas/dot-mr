@@ -18,8 +18,8 @@ git_tags = git tag -l
 svn_tags = svn ls "$(LC_ALL=C svn info . | grep -i ^URL: | cut -d ' ' -f 2 | sed -e 's/trunk/tags/')"
 # I prefer to git-svn rebase to fetch
 git_svn_update = git svn rebase
-pre_update = `keychain --eval`
-pre_push = `keychain --eval`
+pre_update = eval `keychain --eval`
+pre_push = eval `keychain --eval`
 lib =
     # Tests used below.
     hostname="$(hostname)"
