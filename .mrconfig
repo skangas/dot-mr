@@ -139,11 +139,6 @@ checkout = git clone skangas@sk1917.duckdns.org:.repos/dokument/avanti.git avant
 order = 1
 skip = ! private
 
-[dokument/oversattning]
-checkout = git clone skangas@sk1917.duckdns.org:.repos/home-dokument-oversattning.git oversattning
-order = 1
-skip = ! private
-
 [org]
 checkout = git clone skangas@sk1917.duckdns.org:.repos/home-org.git org
 order = 1
